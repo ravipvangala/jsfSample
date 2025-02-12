@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>First JSF</title>
+	
+	<script>
+		function setFieldValue() {
+			alert('click');
+			var nameField = document.getElementById('form-person:name');
+			nameField.value = "Clicked";
+		}
+	</script>
+	
+</h:head>
+<h:body>
+	<h1>Hello, World!</h1>
+	
+	<h:form id="form-person">
+		<h:commandButton value="Implicit" action="implicit"/>
+		<h:commandButton value="Explicit" action="explicit"/>
+		
+		<br/>
+	
+		<h:outputLabel for="name" id="nameField" value="Name: " />
+		<h:inputText id="name" value="#{personBean.name}" onclick="this.value = 'changed!'"/>		
+		<h:commandButton binding="#{personBean.htmlCommandButton}" value="Add name" action="#{personBean.addName}"/>
+		<h:commandButton id="button-click" value="Click" onclick="setFieldValue()"/>
+	</h:form>
+	
+	<br/>
+		
+	<h:dataTable value="#{personBean.names}" var="name">
+		<h:column>
+			<thead>
+				<tr>
+					<th>Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<h:outputText value="#{name}"/>
+					</td>
+				</tr>
+			</tbody>
+		</h:column>
+	</h:dataTable>
+</h:body>
+</html>
